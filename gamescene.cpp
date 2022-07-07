@@ -34,6 +34,9 @@ GameScene::GameScene(QObject *parent)
 
     m_p->settings(m_sPlayer,200,200,0,20);
     entities.push_back(m_p);
+
+    QGraphicsPixmapItem* bgItem = new QGraphicsPixmapItem(m_bgPixmap.scaled(Game::RESOLUTION.width(), Game::RESOLUTION.height()));
+    addItem(bgItem);
 }
 
 void GameScene::loop()
@@ -51,6 +54,7 @@ void GameScene::loop()
             Bullet *b = new Bullet();
             b->settings(m_sBullet, m_p->m_x, m_p->m_y, m_p->m_angle, 10);
             entities.push_back(b);
+            m_spacePressed = false;
         }
         if(m_rightPressed)
         {
@@ -135,34 +139,33 @@ void GameScene::loop()
 
 
         if (rand()%150==0)
-         {
-           Asteroid *a = new Asteroid();
-           a->settings(m_sRock, 0,rand()%Game::RESOLUTION.height(), rand()%360, 25);
-           entities.push_back(a);
-         }
+        {
+            Asteroid *a = new Asteroid();
+            a->settings(m_sRock, 0,rand()%Game::RESOLUTION.height(), rand()%360, 25);
+            entities.push_back(a);
+        }
 
         for(auto i=entities.begin();i!=entities.end();)
         {
-          Entity *e = *i;
+            Entity *e = *i;
 
-          e->update();
-          e->m_anim.update();
+            e->update();
+            e->m_anim.update();
 
-          if (e->m_life == false)
-          {
-              i=entities.erase(i);
-              delete e;
-          }
-          else i++;
+            if (e->m_life == false)
+            {
+                i=entities.erase(i);
+                delete e;
+            }
+            else i++;
         }
 
 
-//        clear();
-//        QGraphicsPixmapItem* bgItem = new QGraphicsPixmapItem(m_bgPixmap.scaled(Game::RESOLUTION.width(), Game::RESOLUTION.height()));
-//        addItem(bgItem);
+        //        clear();
+
 
         for(auto i:entities)
-          i->draw(this);
+            i->draw(this);
     }
 }
 
@@ -253,10 +256,7 @@ void GameScene::loadPixmap()
 void GameScene::keyPressEvent(QKeyEvent *event)
 {
     switch (event->key()) {
-    case Qt::Key_Space:
-    {
-        m_spacePressed = true;
-    }
+
         break;
     case Qt::Key_Up:
     {
@@ -273,6 +273,14 @@ void GameScene::keyPressEvent(QKeyEvent *event)
         m_leftPressed = true;
     }
         break;
+    }
+
+    if( !event->isAutoRepeat() )
+    {
+        if( event->key() == Qt::Key_Space )
+        {
+            m_spacePressed = true;
+        }
     }
     QGraphicsScene::keyPressEvent(event);
 }
