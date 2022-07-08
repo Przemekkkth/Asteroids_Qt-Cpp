@@ -161,11 +161,25 @@ void GameScene::loop()
         }
 
 
-        //clear();
+        clear();
 
 
         for(auto i:entities)
-            i->draw(this);
+        {
+            QPixmap pixmap;
+            QPoint pos;
+            qreal angle;
+            QSize size;
+            qreal R = 0.0;
+            i->draw(pixmap, pos, angle, size, R);
+            QGraphicsPixmapItem* pItem = new QGraphicsPixmapItem();
+            pItem->setPixmap(pixmap);
+            pItem->setPos(pos);
+            pItem->setRotation(angle + 90);
+            pItem->setTransformOriginPoint(size.width(), size.height());
+            addItem(pItem);
+        }
+
     }
 }
 
