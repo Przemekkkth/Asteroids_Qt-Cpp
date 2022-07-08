@@ -16,6 +16,7 @@ public:
     static const QString PATH_TO_ROCK_PIXMAP;
     static const QString PATH_TO_ROCK_SMALL_PIXMAP;
     static const QString PATH_TO_SPACESHIP_PIXMAP;
+    static const QString PATH_TO_SPACESHIP_GO_PIXMAP;
     static const QString PATH_TO_EXPLOSION_A_PIXMAP;
     static const QString PATH_TO_EXPLOSION_B_PIXMAP;
     static const QString PATH_TO_EXPLOSION_C_PIXMAP;

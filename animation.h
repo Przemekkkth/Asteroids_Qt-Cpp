@@ -9,7 +9,7 @@ class Animation
 {
 public:
     float m_frame, m_speed;
-    QGraphicsPixmapItem m_sprite;
+
     std::vector<QRect> m_frames;
     QPixmap m_texture;
 
@@ -21,7 +21,14 @@ public:
 
     bool isEnd();
 
-    Animation& operator=(const Animation& a);
+    std::vector<QRect> frames() const {
+        return m_frames;
+    }
+
+    float framesIndex() const
+    {
+        return m_frame;
+    }
 };
 
 #endif // ANIMATION_H

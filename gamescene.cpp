@@ -17,13 +17,13 @@ GameScene::GameScene(QObject *parent)
     m_timer.start(Game::ITERATION_VALUE);
     m_elapsedTimer.start();
 
-    m_sExplosion = Animation(m_explosionAPixmap, 0,0,256,256, 48, 0.5);
+    //m_sExplosion = Animation(m_explosionAPixmap, 0,0,256,256, 48, 0.5);
     m_sRock = Animation(m_rockPixmap, 0,0,64,64, 16, 0.2);
     m_sRock_small = Animation(m_rockSmallPixmap, 0,0,64,64, 16, 0.2);
     m_sBullet = Animation(m_fireBluePixmap, 0,0,32,64, 16, 0.8);
-    m_sPlayer = Animation(m_spaceShipPixmap, 40,0,40,40, 1, 0);
-    m_sPlayer_go = Animation(m_spaceShipPixmap, 40,40,40,40, 1, 0);
-    m_sExplosion_ship = Animation(m_explosionAPixmap, 0,0,192,192, 64, 0.5);
+    m_sPlayer = Animation(m_spaceShipPixmap, 0,0,99,75, 1, 0);
+    m_sPlayer_go = Animation(m_spaceShipPixmap, 0,0,99,75, 1, 0);
+    //m_sExplosion_ship = Animation(m_explosionAPixmap, 0,0,192,192, 64, 0.5);
 
     for(int i=0;i<15;i++)
     {
@@ -82,10 +82,10 @@ void GameScene::loop()
                         a->m_life = false;
                         b->m_life = false;
 
-                        Entity *e = new Entity();
-                        e->settings(m_sExplosion,a->m_x,a->m_y);
-                        e->m_name="explosion";
-                        entities.push_back(e);
+//                        Entity *e = new Entity();
+//                        e->settings(m_sExplosion,a->m_x,a->m_y);
+//                        e->m_name="explosion";
+//                        entities.push_back(e);
 
 
                         for(int i=0;i<2;i++)
@@ -103,10 +103,10 @@ void GameScene::loop()
                     {
                         b->m_life=false;
 
-                        Entity *e = new Entity();
-                        e->settings(m_sExplosion_ship,a->m_x,a->m_y);
-                        e->m_name="explosion";
-                        entities.push_back(e);
+//                        Entity *e = new Entity();
+//                        e->settings(m_sExplosion_ship,a->m_x,a->m_y);
+//                        e->m_name="explosion";
+//                        entities.push_back(e);
 
                         m_p->settings(m_sPlayer,Game::RESOLUTION.width()/2,Game::RESOLUTION.height()/2,0,20);
                         m_p->m_dx=0;
@@ -161,7 +161,7 @@ void GameScene::loop()
         }
 
 
-        //        clear();
+        //clear();
 
 
         for(auto i:entities)
@@ -223,6 +223,15 @@ void GameScene::loadPixmap()
     else
     {
         qDebug() << "SpaceShipPixmap is not loaded successfully";
+    }
+
+    if(m_spaceShipGoPixmap.load(Game::PATH_TO_SPACESHIP_GO_PIXMAP))
+    {
+        qDebug() << "SpaceShipGoPixmap is loaded successfully";
+    }
+    else
+    {
+        qDebug() << "SpaceShipGoPixmap is not loaded successfully";
     }
 
     if(m_explosionAPixmap.load(Game::PATH_TO_EXPLOSION_A_PIXMAP))

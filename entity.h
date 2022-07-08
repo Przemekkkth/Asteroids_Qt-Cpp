@@ -3,9 +3,11 @@
 #include <QString>
 
 #include "animation.h"
-
+#include <QGraphicsPixmapItem>
+#include <QObject>
 class QGraphicsScene;
-class Entity
+
+class Entity : public QObject
 {
 public:
     Entity();
@@ -18,6 +20,7 @@ public:
     bool m_life;
     QString m_name;
     Animation m_anim;
+    QGraphicsPixmapItem m_pixmapItem;
 };
 
 #endif // ENTITY_H
