@@ -21,6 +21,7 @@ private slots:
     void loop();
 private:
     void loadPixmap();
+    void renderScene();
     Game m_game;
     QPixmap m_bgPixmap, m_fireBluePixmap, m_fireRedPixmap, m_rockPixmap, m_rockSmallPixmap, m_spaceShipPixmap,
         m_spaceShipGoPixmap, m_explosionAPixmap, m_explosionBPixmap, m_explosionCPixmap;

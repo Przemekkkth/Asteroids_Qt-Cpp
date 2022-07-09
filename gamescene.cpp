@@ -4,6 +4,8 @@
 #include "bullet.h"
 #include <QDebug>
 #include <QKeyEvent>
+#include <QDir>
+#include <QPainter>
 #include <list>
 
 GameScene::GameScene(QObject *parent)
@@ -293,6 +295,18 @@ void GameScene::loadPixmap()
     }
 }
 
+void GameScene::renderScene()
+{
+    QString fileName = QDir::currentPath() + QDir::separator() + "game_scene.png";
+    QRect rect = sceneRect().toAlignedRect();
+    QImage image(rect.size(), QImage::Format_ARGB32);
+    image.fill(Qt::transparent);
+    QPainter painter(&image);
+    render(&painter);
+    image.save(fileName);
+    qDebug() << "saved " << fileName;
+}
+
 void GameScene::keyPressEvent(QKeyEvent *event)
 {
     switch (event->key()) {
@@ -347,6 +361,9 @@ void GameScene::keyReleaseEvent(QKeyEvent *event)
     {
         m_leftPressed = false;
     }
+        break;
+    case Qt::Key_Z:
+        //renderScene();
         break;
     }
     QGraphicsScene::keyReleaseEvent(event);
