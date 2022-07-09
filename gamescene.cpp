@@ -17,10 +17,10 @@ GameScene::GameScene(QObject *parent)
     m_timer.start(Game::ITERATION_VALUE);
     m_elapsedTimer.start();
 
-    //m_sExplosion = Animation(m_explosionAPixmap, 0,0,256,256, 48, 0.5);
+    m_sExplosion = Animation(m_explosionAPixmap, 0,0,256,256, 48, 0.5);
     m_sRock = Animation(m_rockPixmap, 0,0,64,64, 16, 0.2);
     m_sRock_small = Animation(m_rockSmallPixmap, 0,0,64,64, 16, 0.2);
-    m_sBullet = Animation(m_fireBluePixmap, 0,0,32,64, 16, 0.8);
+    m_sBullet = Animation(m_fireBluePixmap, 0,0,13,32, 1, 0);
     m_sPlayer = Animation(m_spaceShipPixmap, 0,0,99,75, 1, 0);
     m_sPlayer_go = Animation(m_spaceShipPixmap, 0,0,99,75, 1, 0);
     //m_sExplosion_ship = Animation(m_explosionAPixmap, 0,0,192,192, 64, 0.5);
@@ -79,13 +79,14 @@ void GameScene::loop()
                 if (a->m_name=="asteroid" && b->m_name=="bullet")
                     if ( Game::isCollide(a,b) )
                     {
+
                         a->m_life = false;
                         b->m_life = false;
 
-//                        Entity *e = new Entity();
-//                        e->settings(m_sExplosion,a->m_x,a->m_y);
-//                        e->m_name="explosion";
-//                        entities.push_back(e);
+                        Entity *e = new Entity();
+                        e->settings(m_sExplosion,0,0);
+                        e->m_name="explosion";
+                        entities.push_back(e);
 
 
                         for(int i=0;i<2;i++)
@@ -173,11 +174,18 @@ void GameScene::loop()
             qreal R = 0.0;
             i->draw(pixmap, pos, angle, size, R);
             QGraphicsPixmapItem* pItem = new QGraphicsPixmapItem();
-            pItem->setPixmap(pixmap);
+            pItem->setPixmap(pixmap.scaled(size.width(), size.height()));
             pItem->setPos(pos);
             pItem->setRotation(angle + 90);
-            pItem->setTransformOriginPoint(size.width(), size.height());
+            pItem->setTransformOriginPoint(size.width()/2, size.height()/2);
             addItem(pItem);
+
+//            QGraphicsEllipseItem circle(0, 0, R, R);
+//            circle.setBrush(QColor(255,0,0,170));
+//            circle.setPen(QColor(255,0,0,170));
+//            circle.setPos(pos.x(), pos.y());
+//            circle.setTransformOriginPoint(R, R);
+//            addItem(&circle);
         }
 
     }

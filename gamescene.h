@@ -29,7 +29,7 @@ private:
     QElapsedTimer m_elapsedTimer;
     bool m_spacePressed, m_leftPressed, m_rightPressed, m_upPressed;
 
-    //Animation m_sExplosion;
+    Animation m_sExplosion;
     Animation m_sRock;
     Animation m_sRock_small;
     Animation m_sBullet;
