@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>res/images/spaceship.png</file>
-        <file>res/images/fire_red.png</file>
         <file>res/images/fire_blue.png</file>
         <file>res/images/rock_small.png</file>
         <file>res/images/rock.png</file>
