@@ -17,3 +17,4 @@ qmake && make
 ## Addons
 * [Qt] (https://www.qt.io/) - Cross-Platform software for embedded & desktop
 * [Assets] (https://www.kenney.nl/) - assets
+* [Yt] (https://youtu.be/AjwiXsv7i_s) - gamelay
