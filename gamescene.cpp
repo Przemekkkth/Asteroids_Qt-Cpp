@@ -23,7 +23,7 @@ GameScene::GameScene(QObject *parent)
     m_sBullet = Animation(m_fireBluePixmap, 0,0,13,32, 1, 0);
     m_sPlayer = Animation(m_spaceShipPixmap, 0,0,99,75, 1, 0);
     m_sPlayer_go = Animation(m_spaceShipGoPixmap, 0,0,99,75, 1, 0);
-    //m_sExplosion_ship = Animation(m_explosionAPixmap, 0,0,192,192, 64, 0.5);
+    m_sExplosion_ship = Animation(m_explosionBPixmap, 0,0,96,92,4, 0.5);
 
     for(int i=0;i<15;i++)
     {
@@ -32,7 +32,7 @@ GameScene::GameScene(QObject *parent)
         entities.push_back(a);
     }
 
-    m_p->settings(m_sPlayer,200,200,0,20);
+    m_p->settings(m_sPlayer,Game::RESOLUTION.width()/2,Game::RESOLUTION.height()/2,0,20);
     entities.push_back(m_p);
 
     QGraphicsPixmapItem* bgItem = new QGraphicsPixmapItem(m_bgPixmap.scaled(Game::RESOLUTION.width(), Game::RESOLUTION.height()));
@@ -104,10 +104,10 @@ void GameScene::loop()
                     {
                         b->m_life=false;
 
-//                        Entity *e = new Entity();
-//                        e->settings(m_sExplosion_ship,a->m_x,a->m_y);
-//                        e->m_name="explosion";
-//                        entities.push_back(e);
+                        Entity *e = new Entity();
+                        e->settings(m_sExplosion_ship,a->m_x,a->m_y);
+                        e->m_name="explosion";
+                        entities.push_back(e);
 
                         m_p->settings(m_sPlayer,Game::RESOLUTION.width()/2,Game::RESOLUTION.height()/2,0,20);
                         m_p->m_dx=0;

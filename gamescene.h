@@ -35,7 +35,7 @@ private:
     Animation m_sBullet;
     Animation m_sPlayer;
     Animation m_sPlayer_go;
-    //Animation m_sExplosion_ship;
+    Animation m_sExplosion_ship;
 
     std::list<Entity*> entities;
 
