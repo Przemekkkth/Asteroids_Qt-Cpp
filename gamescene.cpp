@@ -18,6 +18,7 @@ GameScene::GameScene(QObject *parent)
     m_elapsedTimer.start();
 
     m_sExplosion = Animation(m_explosionAPixmap, 0,0,48,46, 4, 0.5);
+    m_sExplosionB = Animation(m_explosionCPixmap, 0,0,48,46, 4, 0.75);
     m_sRock = Animation(m_rockPixmap, 0,0,64,64, 16, 0.2);
     m_sRock_small = Animation(m_rockSmallPixmap, 0,0,64,64, 16, 0.2);
     m_sBullet = Animation(m_fireBluePixmap, 0,0,13,32, 1, 0);
@@ -33,6 +34,8 @@ GameScene::GameScene(QObject *parent)
     }
 
     m_p->settings(m_sPlayer,Game::RESOLUTION.width()/2,Game::RESOLUTION.height()/2,0,20);
+    m_p->m_dx = 0;
+    m_p->m_dy = 0;
     entities.push_back(m_p);
 
     QGraphicsPixmapItem* bgItem = new QGraphicsPixmapItem(m_bgPixmap.scaled(Game::RESOLUTION.width(), Game::RESOLUTION.height()));
@@ -84,7 +87,15 @@ void GameScene::loop()
                         b->m_life = false;
 
                         Entity *e = new Entity();
-                        e->settings(m_sExplosion,a->m_x,a->m_y);
+                        if(rand()%2)
+                        {
+                            e->settings(m_sExplosion,a->m_x,a->m_y);
+                        }
+                        else
+                        {
+                            e->settings(m_sExplosionB,a->m_x,a->m_y);
+                        }
+
                         e->m_name="explosion";
                         entities.push_back(e);
 
